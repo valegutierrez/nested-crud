@@ -1,9 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Nombre de la categoría:</h3>
+    <p>
+      <%= @category.name %>
+    </p>
+    <%= link_to 'Edit', edit_category_path(@category), class: 'btn btn-primary' %>
+    <%= link_to 'Back', categories_path, class: 'btn btn-secondary' %>
+    <p id="notice"><%= notice %></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td><%= link_to "Destroy", category_product_path(@category, product), method: :delete, class:'btn btn-warning' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h3>Nuevo producto:</h3>
+    <%= render 'product_form'%>
+  </div>
+</div>
